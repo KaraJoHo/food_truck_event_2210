@@ -38,6 +38,9 @@ RSpec.describe FoodTruck do
 
   describe '#potential_revenue' do 
     it 'is the sum of all their items price times quantity' do 
+      food_truck.stock(item1, 30) 
+      food_truck.stock(item2, 12) 
+      
       expect(food_truck.potential_revenue).to eq(142.50)
     end
 
