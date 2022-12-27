@@ -27,4 +27,10 @@ class FoodTruck
   def all_truck_items 
     @inventory.keys
   end
+
+  def all_item_names_on_truck 
+    @inventory.map do |item, quantity| 
+      item.name
+    end
+  end
 end

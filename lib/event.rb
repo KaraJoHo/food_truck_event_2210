@@ -40,5 +40,11 @@ class Event
     end
   end
 
+  def all_item_names 
+    @food_trucks.flat_map do |truck| 
+      truck.all_item_names_on_truck
+    end.sort.uniq
+  end
+
 end
 
