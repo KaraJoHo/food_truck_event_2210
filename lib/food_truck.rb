@@ -23,4 +23,8 @@ class FoodTruck
       (item.price * quantity).round(2)
     end
   end
+
+  def all_truck_items 
+    @inventory.keys
+  end
 end

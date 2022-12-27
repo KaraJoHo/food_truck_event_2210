@@ -22,5 +22,23 @@ class Event
     end
   end
 
+  def overstocked_items 
+    all_event_items.flatten.find_all do |item| 
+       food_trucks_that_sell(item).count >= 2 && item_quantity_on_trucks_that_sell_item(item) > 50
+    end.uniq 
+  end
+
+  def all_event_items 
+    @food_trucks.map do |truck| 
+      truck.all_truck_items
+    end
+  end
+
+  def item_quantity_on_trucks_that_sell_item(item)
+    food_trucks_that_sell(item).sum do |truck| 
+      truck.inventory[item]
+    end
+  end
+
 end
 
