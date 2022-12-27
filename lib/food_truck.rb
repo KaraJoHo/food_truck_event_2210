@@ -5,4 +5,12 @@ class FoodTruck
     @name = name 
     @inventory = Hash.new(0)
   end
+
+  def check_stock(item) 
+   if @inventory.has_key?(item) == false 
+    @inventory[item]
+   else 
+    @inventory[item]
+   end
+  end
 end
