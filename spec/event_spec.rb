@@ -111,10 +111,10 @@ RSpec.describe Event do
       event.add_food_truck(food_truck3)  
 
       expected = {
-                  item1: {quantity: 100, sold_on: [food_truck1, food_truck3]},
-                  item2: {quantity: 7, sold_on: [food_truck1]},
-                  item3: {quantity: 25, sold_on: [food_truck2]}, 
-                  item4: {quantity: 50, sold_on: food_truck2}                
+                  item1 => {quantity: 100, sold_on: [food_truck1, food_truck3]},
+                  item2 => {quantity: 7, sold_on: [food_truck1]},
+                  item3 => {quantity: 25, sold_on: [food_truck2]}, 
+                  item4 => {quantity: 50, sold_on: [food_truck2]}                
       }
 
       expect(event.item_inventory_hash).to eq(expected)

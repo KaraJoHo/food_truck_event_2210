@@ -31,7 +31,7 @@ class Event
   def all_event_items 
     @food_trucks.map do |truck| 
       truck.all_truck_items
-    end
+    end.flatten
   end
 
   def item_quantity_on_trucks_that_sell_item(item)
@@ -46,5 +46,22 @@ class Event
     end.sort.uniq
   end
 
+  def item_inventory_hash 
+    item_inventory = {}
+
+    all_event_items.each do |item|
+      item_inventory[item] = {}
+    end
+
+     item_inventory.each do |item, value_hash| 
+      value_hash = {quantity: item_quantity_on_trucks_that_sell_item(item), sold_on: food_trucks_that_sell(item).uniq}
+      item_inventory[item] = value_hash
+     end
+
+    item_inventory
+    #require 'pry'; binding.pry
+ 
+   
+  end
 end
 
