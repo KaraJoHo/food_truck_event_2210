@@ -95,4 +95,29 @@ RSpec.describe Event do
       expect(event.all_item_names).to eq(['Apple Pie (Slice)', "Banana Nice Cream", 'Peach Pie (Slice)', "Peach-Raspberry Nice Cream"])
     end
   end
+
+  describe '#item_inventory_hash' do 
+    it 'can return a list of items and its quantity and trucks its sold on' do 
+      food_truck1.stock(item1, 35)    
+      food_truck1.stock(item2, 7)  
+
+      food_truck2.stock(item4, 50)    
+      food_truck2.stock(item3, 25)
+
+      food_truck3.stock(item1, 65)  
+
+      event.add_food_truck(food_truck1)    
+      event.add_food_truck(food_truck2)    
+      event.add_food_truck(food_truck3)  
+
+      expected = {
+                  item1: {quantity: 100, sold_on: [food_truck1, food_truck3]},
+                  item2: {quantity: 7, sold_on: [food_truck1]},
+                  item3: {quantity: 25, sold_on: [food_truck2]}, 
+                  item4: {quantity: 50, sold_on: food_truck2}                
+      }
+
+      expect(event.item_inventory_hash).to eq(expected)
+    end
+  end
 end
