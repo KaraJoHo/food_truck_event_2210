@@ -1,5 +1,5 @@
 class Event 
-  attr_reader :name, :food_trucks
+  attr_reader :name, :food_trucks, :start_date
 
   def initialize(name)
     @name = name 
@@ -59,9 +59,10 @@ class Event
      end
 
     item_inventory
-    #require 'pry'; binding.pry
- 
-   
+  end
+
+  def start_date(date)
+     date.strftime('%d/%m/%Y')
   end
 end
 

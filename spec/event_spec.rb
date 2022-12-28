@@ -19,6 +19,9 @@ RSpec.describe Event do
       expect(event).to be_a(Event)
       expect(event.name).to eq("South Pearl Street Farmers Market")
       expect(event.food_trucks).to eq([])
+
+      allow(event).to receive(event.start_date(Time.new(2015, 02, 01))).and_return('01/02/2015')
+      expect(event.start_date(Time.new(2015, 02, 01))).to eq('01/02/2015')
     end
   end
 
