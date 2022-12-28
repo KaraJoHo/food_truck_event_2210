@@ -64,5 +64,29 @@ class Event
   def start_date(date)
      date.strftime('%d/%m/%Y')
   end
+
+  def can_sell_item?(item, quantity)
+    if event_item_quantities_available?(item, quantity) == true
+      first_truck_sells_item(item, quantity)
+      true
+    else 
+      false
+    end
+  end
+
+  def event_item_quantities_available?(item, quantity)
+    food_trucks.any? do |truck| 
+     truck.inventory[item] > quantity
+    end
+  end
+
+  def first_truck_sells_item(item, quantity)
+    food_trucks_that_sell(item).map do |truck| 
+      if truck.inventory[item] != 0 
+        truck.sell_item(item, quantity)
+      end
+      break if truck.inventory[item] != 0
+    end
+  end
 end
 

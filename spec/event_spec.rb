@@ -141,9 +141,6 @@ RSpec.describe Event do
       expect(event.can_sell_item?(item1, 5)).to eq(true)
       expect(event.can_sell_item?(item2, 2)).to eq(true)
       expect(event.can_sell_item?(item3, 5)).to eq(true)
-      event.can_sell_item?(item1, 5)
-      event.can_sell_item?(item2, 2)
-      event.can_sell_item?(item3, 5)
 
       food_truck1_inventory = {
                                 item1 => 30, 
@@ -157,6 +154,7 @@ RSpec.describe Event do
       }
 
       expect(event.can_sell_item?(item2, 10)).to eq(false)
+      expect(food_truck1.inventory).to eq(food_truck1_inventory)
     end
   end
 end

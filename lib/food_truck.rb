@@ -33,4 +33,8 @@ class FoodTruck
       item.name
     end
   end
+
+  def sell_item(item, quantity)
+    @inventory[item] -= quantity
+  end
 end
