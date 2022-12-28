@@ -123,4 +123,40 @@ RSpec.describe Event do
       expect(event.item_inventory_hash).to eq(expected)
     end
   end
+
+  describe '#can_sell_item' do 
+    it 'can sell an item of a given amount, return true if it is available false if not' do 
+      food_truck1.stock(item1, 35)    
+      food_truck1.stock(item2, 7)  
+
+      food_truck2.stock(item4, 50)    
+      food_truck2.stock(item3, 25)
+
+      food_truck3.stock(item1, 65)  
+
+      event.add_food_truck(food_truck1)    
+      event.add_food_truck(food_truck2)    
+      event.add_food_truck(food_truck3)  
+
+      expect(event.can_sell_item?(item1, 5)).to eq(true)
+      expect(event.can_sell_item?(item2, 2)).to eq(true)
+      expect(event.can_sell_item?(item3, 5)).to eq(true)
+      event.can_sell_item?(item1, 5)
+      event.can_sell_item?(item2, 2)
+      event.can_sell_item?(item3, 5)
+
+      food_truck1_inventory = {
+                                item1 => 30, 
+                                item2 => 5
+
+      }
+
+      food_truck2_inventory = { 
+                                item4 => 50,
+                                item3 => 20
+      }
+
+      expect(event.can_sell_item?(item2, 10)).to eq(false)
+    end
+  end
 end
